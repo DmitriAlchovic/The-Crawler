@@ -1,0 +1,80 @@
+.product-info-container
+    position: relative
+    display: flex
+    flex-direction: column
+    height: 387px
+    width: 224px
+    justify-content: space-between
+    margin: 12px
+    border: 1px solid rgba(173, 173, 173, 0.25)
+    border-radius: 3px
+
+    .info-header
+        position: relative
+        width: inherit
+
+        .discount
+            position: absolute
+            background-color: #ffd480
+            color: #ffff
+            font-size: 12px
+            height: 27px
+            width: 78px
+            display: flex
+            justify-content: center
+            align-items: center
+            bottom: 0
+            top: 0
+
+        .product-img
+            object-fit: contain
+            width: inherit
+            height: 154px
+
+        .category
+            margin-left: 10px
+            font-size: 12px
+            font-weight: 400
+            color: #adadad
+
+        .product-name
+            margin-left: 10px
+            font-size: 16px
+            margin-top: 7px
+
+    .info-body
+        position: relative
+        padding: 10px
+
+        .product-price
+            color: #3bb77e
+            margin-bottom: 16px
+
+        .quantity-bar-container
+            position: relative
+            width: 100%
+            background-color: #afafaf
+            height: 10px
+            border-radius: 50px
+
+            .quantity-bar
+                background-color: #3BB77E
+                height: inherit
+                border-radius: 50px
+            
+            .quantity
+                font-size: 13px
+
+    .add-btn
+        background-color: #3BB77E
+        color: #ffff
+        width: 204px
+        height: 40px
+        display: flex
+        justify-content: center
+        align-self: center
+        align-items: center
+        font-size: 14px
+        margin: 10px
+        cursor: pointer
+

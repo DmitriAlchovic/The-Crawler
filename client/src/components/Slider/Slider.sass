@@ -1,0 +1,78 @@
+.sliderContentContainer
+    height: 481px
+    display: flex
+    background: linear-gradient(0deg, rgba(255,212,127,1) 0%, rgba(202,232,210,1) 50%, rgba(197,234,217,1) 100%)
+    overflow: hidden
+
+.sliderInfo
+    width: 70vw
+    padding: 5% 10% 10% 10%
+    overflow: hidden
+
+.imgContainer
+    position: relative
+    object-fit: cover
+    width: 30vw
+    height: 481px
+
+.sliderContainer
+    position: relative
+    max-width: 100vw
+    overflow: hidden
+    margin-bottom: 110px
+
+    .hiden
+        background: linear-gradient(0deg, rgba(255,212,127,1) 0%, rgba(202,232,210,1) 50%, rgba(197,234,217,1) 100%)
+        opacity: 0
+        top: 0
+        position: absolute
+        margin-left: 100vw
+        transition-property: margin-left, opacity
+        transition-duration: 3s
+        height: 481px
+        display: flex
+        z-index: 1
+        width: 100vw
+        overflow: hidden
+
+.sliderRadio:hover
+    cursor: pointer
+
+.sliderRadio
+    border: 2px solid #999
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    border-radius: 50%
+    transition: 0.2s all linear
+    width: 10px
+    height: 10px
+    margin: 3px
+    z-index: 2
+
+.sliderRadio:checked
+    border: 5px solid #3BB77E
+
+.radioContainer
+    display: flex
+    position: absolute
+    bottom: 5%
+    align-self: center
+    justify-self: center
+    left: 50%
+
+.priceWithoutDiscount
+    color: grey
+    text-decoration-line: line-through
+    font-style: normal
+    font-weight: 400
+
+.discount
+    margin-top: 6%
+    font-size: 20px
+    color: #838383
+
+.sliderText
+    font-weight: 700
+    font-size: 55px
+    font-style: bold
