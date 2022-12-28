@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Dropdown from '../Dropdown';
 import Searchbar from '../Dropdown/Searchbar';
 import hot from '../../assets/icon_hotjar.svg';
 import home from '../../assets/icon_home.svg';
@@ -11,6 +10,7 @@ import phone from '../../assets/icon_phone.svg';
 import logo from '../../assets/logo.svg';
 import styles from './Navbar.module.sass';
 import Cart from '../Cart';
+import ProfileMenu from '../ProfileMenu';
 
 export default function Navbar() {
   const { pathname } = useLocation();
@@ -28,10 +28,7 @@ export default function Navbar() {
           <Cart />
         </div>
         <div>
-          <Dropdown hasChildrenClose={false}>
-            <div>Profile</div>
-          </Dropdown>
-          profile
+          <ProfileMenu />
         </div>
       </div>
       <div className={styles.footer}>

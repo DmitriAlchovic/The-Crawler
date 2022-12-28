@@ -3,6 +3,8 @@ import sliderReducer from './reducers/sliderSlice';
 import categoryReducer from './reducers/categorySlice';
 import searchReducer from './reducers/searchSlice';
 import cartReducer from './reducers/cartSlice';
+import registerReducer from './reducers/registerSlice';
+import loginReducer from './reducers/loginSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
     categories: categoryReducer,
     search: searchReducer,
     cart: cartReducer,
+    register: registerReducer,
+    login: loginReducer,
   },
 });
 

@@ -13,13 +13,11 @@ import { ProductInventory } from './inventory.model';
 import { OrderDetails } from './order_details.model';
 
 interface UserCreation {
-  userId: number;
-  email: number;
+  email: string;
   password: string;
   fullName: string;
   phoneNumber: string;
-  avatar: string;
-  discount: number;
+  discountId: number;
 }
 
 @Table({ tableName: 'user' })
@@ -50,7 +48,7 @@ export class User extends Model<User, UserCreation> {
   @Column({ type: DataType.STRING })
   declare avatar: string;
   @BelongsTo(() => Discount, {
-    foreignKey: { name: 'discountId', allowNull: false },
+    foreignKey: { name: 'discountId', allowNull:true, defaultValue:2, field:'discountId' }
   })
   declare discount: Discount;
 }

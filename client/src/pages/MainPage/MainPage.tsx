@@ -25,12 +25,14 @@ export default function MainPage() {
     categories,
     products: categoryProducts,
   } = useAppSelector((state) => state.categories);
+  const { profile } = useAppSelector((state) => state.login);
+  const dispatch = useAppDispatch();
+
   const [categorySliderIndex, setSliderIndex] = useState(CATEGORY_SLIDER_SIZE);
   const [productSliderIndex, setProductSliderIndex] =
     useState(PRODUCT_SLIDER_SIZE);
   const [activeSubcategory, setActiveSubcategory] = useState('All');
   const [activeProductCategory, setActiveProductCategory] = useState('All');
-  const dispatch = useAppDispatch();
 
   const categorySliderHandler = (step: number) => {
     setSliderIndex(categorySliderIndex + step);
@@ -116,7 +118,7 @@ export default function MainPage() {
             <p className="login-register-text">
               For new member sign up at the first time
             </p>
-            <RegisterLoginCard />
+            {!profile && <RegisterLoginCard hasDefaultLogin={false} />}
           </div>
         </div>
       </div>
