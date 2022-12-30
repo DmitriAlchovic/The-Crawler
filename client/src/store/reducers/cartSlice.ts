@@ -19,7 +19,7 @@ export const fetchUserCart = createAsyncThunk<
 Product[],
 string,
 { state: RootState }
->('cart/fetchUsercart', async (token, { getState }) => {
+>('cart/fetchUserCart', async (token, { getState }) => {
   const { cart } = getState();
   const response = await fetch('http://localhost:5000/api/product/list', {
     method: 'POST',
@@ -41,12 +41,18 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addCartItem(state, action: PayloadAction<number>) {
+    addCartItem(
+      state,
+      action: PayloadAction<{ productId: number; quantity: number }>,
+    ) {
       const inCart = state.items.find(
-        ({ productId }) => productId === action.payload,
+        ({ productId }) => productId === action.payload.productId,
       );
       if (!inCart) {
-        state.items.push({ productId: action.payload, quantity: 1 });
+        state.items.push({
+          productId: action.payload.productId,
+          quantity: action.payload.quantity,
+        });
       }
     },
     changeQuantity(

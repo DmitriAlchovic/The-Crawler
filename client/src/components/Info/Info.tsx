@@ -19,7 +19,7 @@ export default function Info() {
       <div className={styles.info}>
         <p className={styles.header}>Free delivery</p>
         <p className={styles.body}>
-          Do purchase over $50 and get free delivery anywher
+          Do purchase over $50 and get free delivery anywhere
         </p>
       </div>
     </div>

@@ -61,6 +61,11 @@ export const byCategoryController = async (categoryName: string) => {
       attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
       include: [
         {
+          model: Discount,
+          attributes: ['name', 'desc', 'discountPercent'],
+          order: ['updatedAt'],
+        },
+        {
           model: Subcategory,
           include: [
             {
@@ -141,6 +146,29 @@ export const searchByCategoryController = async (
 export const cartController = async (idList: number[]) => {
   return await Product.findAll({
     where: {productId: idList},
+    raw: true,
+    nest: true,
+    attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
+    include: [
+      {
+        model: Discount,
+        attributes: ['name', 'desc', 'discountPercent'],
+      },
+      {
+        model: Subcategory,
+        include: [{ model: Category, attributes: ['name'] }],
+      },
+      {
+        model: ProductInventory,
+        attributes: ['currentQuantity', 'initialQuantity'],
+      },
+    ],
+  });
+};
+
+export const productController = async (productId: number) => {
+  return await Product.findOne({
+    where: { productId: productId },
     raw: true,
     nest: true,
     attributes: ['productId', 'name', 'gallery', 'desc', 'price'],

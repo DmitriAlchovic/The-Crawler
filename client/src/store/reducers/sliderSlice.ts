@@ -24,6 +24,7 @@ export type Product = {
   gallery: string;
   subcategory: Subcategory;
   inventory: Inventory;
+  desc: string;
 };
 
 type SliderState = {

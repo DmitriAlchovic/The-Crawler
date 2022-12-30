@@ -44,7 +44,7 @@ export default function Dropdown({
           />
         )}
         <div
-          className={isShown ? styles['children-container'] : styles.hiden}
+          className={isShown ? styles['children-container'] : styles.hidden}
           aria-label="label"
           tabIndex={-1}
           role="button"

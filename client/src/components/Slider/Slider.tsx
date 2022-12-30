@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeIndex, fetchFeatured } from '../../store/reducers/sliderSlice';
+import paths from '../../utils/paths';
 import './Slider.sass';
 
 export default function Slider() {
@@ -18,18 +20,26 @@ export default function Slider() {
     }, index) => (
       <div
         key={productId}
-        className={index === slideIndex ? 'sliderContentContainer' : 'hiden'}
+        className={index === slideIndex ? 'sliderContentContainer' : 'hidden'}
       >
         <div className="sliderInfo">
           {discount.name && <p className="sliderText">{discount.name}</p>}
-          <p className="sliderText">
-            {`${name} $${price - price * (discount.discountPercent / 100)} `}
-            {discount.discountPercent && <span className="priceWithoutDiscount">{`$${price}`}</span>}
-          </p>
-          {discount.discountPercent && <p className="discount">{`Save ${discount.discountPercent}%`}</p>}
+          <Link to={`${paths.productPage}${productId}`}>
+            <p className="sliderText">
+              {`${name} $${price - price * (discount.discountPercent / 100)} `}
+              {discount.discountPercent && (
+                <span className="priceWithoutDiscount">{`$${price}`}</span>
+              )}
+            </p>
+          </Link>
+          {discount.discountPercent && (
+            <p className="discount">{`Save ${discount.discountPercent}%`}</p>
+          )}
         </div>
         <div>
-          <img className="imgContainer" alt="no img" src={gallery} />
+          <Link to={`${paths.productPage}${productId}`}>
+            <img className="imgContainer" alt="no img" src={gallery} />
+          </Link>
         </div>
       </div>
     ),

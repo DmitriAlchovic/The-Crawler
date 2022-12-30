@@ -15,7 +15,7 @@ export default function ProductInfo({
   currentQuantity,
   discountPercent,
 }: ProductInfoProps) {
-  const findPrecent = (inititial: number, current: number): number => Math.floor((current / inititial) * 100);
+  const findPercent = (initial: number, current: number): number => Math.floor((current / initial) * 100);
 
   return (
     <div className={styles['info-body']}>
@@ -29,7 +29,7 @@ export default function ProductInfo({
             <div
               className={styles['quantity-bar']}
               style={{
-                width: `${findPrecent(initialQuantity, currentQuantity)}%`,
+                width: `${findPercent(initialQuantity, currentQuantity)}%`,
               }}
             />
           </div>

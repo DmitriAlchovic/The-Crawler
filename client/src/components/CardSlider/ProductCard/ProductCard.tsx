@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Product } from '../../../store/reducers/sliderSlice';
 import cart from '../../../assets/shopping-cart-green.svg';
 import './ProductCard.sass';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { addCartItem } from '../../../store/reducers/cartSlice';
+import paths from '../../../utils/paths';
 
 interface ProductCardProps {
   product: Product;
@@ -36,19 +38,26 @@ export default function ProductCard({
       className={
         index >= sliderIndex - sliderSize && index < sliderIndex
           ? 'product-card-container'
-          : 'card-hiden'
+          : 'card-hidden'
       }
     >
-      <div>
-        <img className="product-image" alt="product" src={product.gallery} />
-      </div>
-      <div className="card-body">
-        <div className="category">{product.subcategory.category.name}</div>
-        <div className="product-name">{product.name}</div>
-      </div>
+      <Link to={`${paths.productPage}${product.productId}`}>
+        <div>
+          <img className="product-image" alt="product" src={product.gallery} />
+        </div>
+        <div className="card-body">
+          <div className="category">{product.subcategory.category.name}</div>
+          <div className="product-name">{product.name}</div>
+        </div>
+      </Link>
       <div>
         <div className="card-footer">
-          <div className="price">{`${product.price - product.price * (product.discount.discountPercent / 100)}$`}</div>
+          <div className="price">
+            {`${
+              product.price
+            - product.price * (product.discount.discountPercent / 100)
+            }$`}
+          </div>
           <button
             type="button"
             disabled={isInCart}
@@ -56,7 +65,9 @@ export default function ProductCard({
             tabIndex={-1}
             className={isInCart ? 'button-disabled' : 'add-button'}
             onClick={() => {
-              dispatch(addCartItem(product.productId));
+              dispatch(
+                addCartItem({ productId: product.productId, quantity: 1 }),
+              );
             }}
           >
             {isInCart ? (

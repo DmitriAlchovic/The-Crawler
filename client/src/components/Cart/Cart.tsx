@@ -17,17 +17,7 @@ export default function Cart() {
     dispatch(fetchUserCart(''));
   }, [items]);
 
-  const itemsSumm = (): number => {
-    if (cart.products) {
-      return cart.products.reduce(
-        (prev, { price, discount }) => prev + price - price * (discount.discountPercent / 100),
-        0,
-      );
-    }
-    return 0;
-  };
-
-  const totalSumm = () => {
+  const totalSum = () => {
     const total = items.reduce((prev, { productId: id, quantity }): number => {
       if (products) {
         const index = products.findIndex(({ productId }) => productId === id);
@@ -76,9 +66,9 @@ export default function Cart() {
             <div>
               Total:
               {`$${totalDisc()}`}
-              {totalSumm() !== totalDisc() && totalSumm() && (
+              {totalSum() !== totalDisc() && totalSum() && (
                 <span className={styles['non-discount-price']}>
-                  {`$${totalSumm()}`}
+                  {`$${totalSum()}`}
                 </span>
               )}
             </div>
@@ -102,7 +92,7 @@ export default function Cart() {
         </div>
         <div className={styles['cart-info']}>
           <div>My cart</div>
-          <div className={styles.summ}>{`$${itemsSumm()}`}</div>
+          <div className={styles.sum}>{`$${totalDisc()}`}</div>
         </div>
       </div>
     </div>
