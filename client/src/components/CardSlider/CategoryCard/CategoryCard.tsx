@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Subcategory } from '../../../store/reducers/categorySlice';
+import paths from '../../../utils/paths';
 import './CategoryCard.sass';
 
 interface CategoryCardProps {
@@ -18,15 +20,18 @@ export default function CategoryCard({
   return (
     <div
       className={
-        index >= (sliderIndex - sliderSize) && index < sliderIndex ? 'category-container' : 'container-hidden'
+        index >= sliderIndex - sliderSize && index < sliderIndex
+          ? 'category-container'
+          : 'container-hidden'
       }
     >
       <div>
-        <div className="img-container">
-          <img className="category-img" alt="no img" src={category.image} />
-        </div>
-        <div className="category-name">{category.name}</div>
-        <div className="category-items">{`items ${index}`}</div>
+        <Link to={`${paths.categoryPage}${category.name}/1`}>
+          <div className="img-container">
+            <img className="category-img" alt="no img" src={category.image} />
+          </div>
+          <div className="category-name">{category.name}</div>
+        </Link>
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ export type Product = {
   subcategory: Subcategory;
   inventory: Inventory;
   desc: string;
+  count: number;
 };
 
 type SliderState = {

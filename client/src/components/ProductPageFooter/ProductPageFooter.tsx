@@ -21,7 +21,7 @@ export default function ProductPageFooter({
       <div className={styles['quantity-changer']}>
         <button
           type="button"
-          className={styles['arrow-up']}
+          className={quantity + 1 <= currentQuantity ? styles['arrow-up'] : `${styles.disabled} ${styles['arrow-up']}`}
           onClick={() => {
             quantityHandler(1);
           }}
@@ -31,7 +31,7 @@ export default function ProductPageFooter({
         <div className={styles.quantity}>{quantity}</div>
         <button
           type="button"
-          className={styles['arrow-down']}
+          className={quantity - 1 !== 0 ? styles['arrow-down'] : `${styles.disabled} ${styles['arrow-down']}`}
           onClick={() => {
             quantityHandler(-1);
           }}

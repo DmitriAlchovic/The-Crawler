@@ -43,7 +43,7 @@ export class Product extends Model<Product, productCreation> {
   @Column({ type: DataType.STRING })
   declare desc: string;
   @BelongsTo(() => Subcategory, {
-    foreignKey: { name: 'subcategoryId', allowNull: false },
+    foreignKey: { name: 'subcategoryId', allowNull: false, field: 'subcategoryId' },
   })
   declare subcategory: Subcategory;
   @BelongsTo(() => Discount, 'discountId')

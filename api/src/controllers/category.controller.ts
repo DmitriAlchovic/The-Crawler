@@ -42,4 +42,13 @@ export const categoryController = async () => {
   });
 };
 
+export const subcategoryByNameController = async (subcategoryName: string) => {
+  return await Subcategory.findOne({
+    raw: true,
+    nest: true,
+    where: {name: subcategoryName},
+    attributes: ['subcategoryId'],
+  });
+}
+
 export default { subcategoryController, categoryController };

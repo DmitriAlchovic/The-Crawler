@@ -11,7 +11,7 @@ import {
 import { Category } from './category.model';
 import { Product } from './product.model';
 
-interface SubategoryCreation {
+interface SubcategoryCreation {
   subcategoryId: number;
   name: string;
   desc: string;
@@ -21,7 +21,7 @@ interface SubategoryCreation {
 }
 
 @Table({ tableName: 'product_subcategory' })
-export class Subcategory extends Model<Subcategory, SubategoryCreation> {
+export class Subcategory extends Model<Subcategory, SubcategoryCreation> {
   @AllowNull(false)
   @ForeignKey(() => Product)
   @Column({

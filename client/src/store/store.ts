@@ -6,6 +6,7 @@ import cartReducer from './reducers/cartSlice';
 import registerReducer from './reducers/registerSlice';
 import loginReducer from './reducers/loginSlice';
 import productReducer from './reducers/productSlice';
+import SubcategoryReducer from './reducers/subcategorySlice';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     register: registerReducer,
     login: loginReducer,
     product: productReducer,
+    subcategory: SubcategoryReducer,
   },
 });
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import payment from '../../assets/payment.svg';
 import facebook from '../../assets/icon _facebook_.svg';
 import linkedin from '../../assets/icon _linkedin_.svg';
@@ -11,6 +12,7 @@ import envelope from '../../assets/icon_envelope.svg';
 import clock from '../../assets/icon_clock.svg';
 import logo from '../../assets/logo.svg';
 import styles from './Footer.module.sass';
+import paths from '../../utils/paths';
 
 export default function Footer() {
   return (
@@ -39,13 +41,10 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <div className={styles['info-header']}>Account</div>
-          <div className={styles.info}>Cart</div>
-          <div className={styles.info}>Account info</div>
-        </div>
-        <div>
           <div className={styles['info-header']}>Useful links</div>
-          <div className={styles.info}>Hot deals</div>
+          <Link to={`${paths.categoryPage}hot/1`}><div className={styles.info}>Hot deals</div></Link>
+          <Link to={`${paths.categoryPage}promotions/1`}><div className={styles.info}>Promotions</div></Link>
+          <Link to={`${paths.categoryPage}new/1`}><div className={styles.info}>New products</div></Link>
         </div>
       </div>
       <div className={styles['footer-body']}>

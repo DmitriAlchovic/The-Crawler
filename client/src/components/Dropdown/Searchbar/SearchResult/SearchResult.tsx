@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Product } from '../../../../store/reducers/sliderSlice';
 import cart from '../../../../assets/shopping-cart-green.svg';
 import styles from './SearchResult.module.sass';
+import paths from '../../../../utils/paths';
 
 interface SearchResultProps {
   searchInput: string;
@@ -21,7 +22,7 @@ export default function SearchResult({
         products &&
         products.map(({ name, productId, price, gallery, discount }) => (
           <div className={styles['search-item']}>
-            <Link key={productId} to={`/${productId}`}>
+            <Link key={productId} to={`${paths.productPage}${productId}`}>
               <img
                 className={styles['result-img']}
                 alt="product"

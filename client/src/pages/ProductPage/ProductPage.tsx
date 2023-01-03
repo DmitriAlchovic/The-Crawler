@@ -23,7 +23,12 @@ export default function ProductPage() {
   }, []);
 
   const quantityHandler = (changer: number) => {
-    if (quantity + changer !== 0) {
+    if (
+      quantity + changer !== 0
+      && product
+      && product.inventory.currentQuantity
+        >= quantity + changer
+    ) {
       setQuantity(quantity + changer);
     }
   };
@@ -57,12 +62,14 @@ export default function ProductPage() {
             discountPercent={product.discount.discountPercent}
           />
           <div className={styles.desc}>{product?.desc}</div>
-          <ProductPageFooter
-            quantityHandler={quantityHandler}
-            initialQuantity={product.inventory.initialQuantity}
-            currentQuantity={product.inventory.currentQuantity}
-            quantity={quantity}
-          />
+          {product.inventory.currentQuantity && (
+            <ProductPageFooter
+              quantityHandler={quantityHandler}
+              initialQuantity={product.inventory.initialQuantity}
+              currentQuantity={product.inventory.currentQuantity}
+              quantity={quantity}
+            />
+          )}
           {product?.inventory.currentQuantity && (
             <button
               type="button"
