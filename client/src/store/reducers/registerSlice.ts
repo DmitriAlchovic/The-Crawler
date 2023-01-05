@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/no-cycle
+import { postRegisterUser, postValidateRegister } from '../../services/userService';
 import type { RootState } from '../store';
 
-type RegisterInfo = {
+export type RegisterInfo = {
   email: string;
   password: string;
   userName: string;
@@ -25,13 +27,8 @@ string,
   'register/validateRegister',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:5000/api/user/validate', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await postValidateRegister(email, password);
       const data = await response.json();
-      console.log(data, response);
       if (!response.ok) {
         throw new Error(data.message);
       }
@@ -52,18 +49,10 @@ RegisterInfo,
     email, password, userName, phoneNumber,
   }, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:5000/api/user/register', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          password,
-          userName,
-          phoneNumber,
-        }),
+      const response = await postRegisterUser({
+        email, password, userName, phoneNumber,
       });
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error: any) {
       return rejectWithValue(error);
@@ -109,6 +98,7 @@ const registerSlice = createSlice({
         if (action.payload) {
           state.error = action.payload.message;
         }
+        state.loading = false;
       })
       .addCase(postRegister.pending, (state) => {
         state.loading = true;
@@ -123,6 +113,7 @@ const registerSlice = createSlice({
         if (action.payload) {
           state.error = action.payload.message;
         }
+        state.loading = false;
       });
   },
 });

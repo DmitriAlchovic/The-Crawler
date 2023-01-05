@@ -11,7 +11,7 @@ const PORT = process.env.API_PORT || 5000;
 async function runServer() {
   try {
     await db.sync();
-    console.log('Connection has been established sucsessfully');
+    console.log('Connection has been established successfully');
   } catch (error) {
     console.log(`Error!:${error}`);
   }
@@ -21,7 +21,7 @@ async function runServer() {
   app.use('/api', router);
   app.use('/images', express.static(__dirname + '/images'));
   
-  app.listen(PORT, () => console.log(`Server is runnitng on port ${PORT}`));
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 }
 
 runServer();

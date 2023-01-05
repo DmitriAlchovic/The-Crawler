@@ -1,0 +1,51 @@
+.slider-content-container
+    height: 481px
+    display: flex
+    position: relative
+    background: linear-gradient(0deg, rgba(255,212,127,1) 0%, rgba(202,232,210,1) 50%, rgba(197,234,217,1) 100%)
+    overflow: hidden
+
+.hidden
+    background: linear-gradient(0deg, rgba(255,212,127,1) 0%, rgba(202,232,210,1) 50%, rgba(197,234,217,1) 100%)
+    opacity: 0
+    top: 0
+    position: absolute
+    margin-left: 100vw
+    transition-property: margin-left, opacity
+    transition-duration: 3s
+    height: 481px
+    display: flex
+    z-index: 1
+    width: 100vw
+    overflow: hidden
+
+.price-without-discount
+    color: grey
+    text-decoration-line: line-through
+    font-style: normal
+    font-weight: 400
+
+.discount
+    margin-top: 6%
+    font-size: 20px
+    color: #838383
+
+a
+    text-decoration: none
+    color: #000
+
+.slider-text
+    font-weight: 700
+    font-size: 55px
+    font-style: bold
+
+.img-container
+    position: relative
+    object-fit: cover
+    width: 30vw
+    height: 481px
+
+.slider-info
+    width: 70vw
+    padding: 5% 10% 10% 10%
+    overflow: hidden

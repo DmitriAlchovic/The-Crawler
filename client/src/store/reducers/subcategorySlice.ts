@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getSubcategoryProducts } from '../../services/productService';
 import { Product } from './sliderSlice';
 
 type SubcategoryState = {
@@ -10,20 +11,27 @@ type SubcategoryState = {
 };
 
 type SubcategoryFetchProductsData = {
-  categoryName: string,
-  page: string,
+  categoryName: string;
+  page: string;
 };
 
 export const fetchSubcategoryProducts = createAsyncThunk<
 { products: Product[]; count: number },
-SubcategoryFetchProductsData
->('subcategory/fetchSubcategoryProducts', async ({ categoryName, page }) => {
-  const response = await fetch(
-    `http://localhost:5000/api/subcategory/${categoryName}/${page}`,
-  );
-  const data = await response.json();
-  return data;
-});
+SubcategoryFetchProductsData,
+{ rejectValue: Error }
+>(
+  'subcategory/fetchSubcategoryProducts',
+  async ({ categoryName, page }, { rejectWithValue }) => {
+    try {
+      const response = await getSubcategoryProducts(categoryName, page);
+      const data = await response.json();
+      if (!response.ok) { throw new Error(data.message); }
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error);
+    }
+  },
+);
 
 const initialState: SubcategoryState = {
   products: [],
@@ -45,6 +53,12 @@ const subcategorySlice = createSlice({
       .addCase(fetchSubcategoryProducts.fulfilled, (state, action) => {
         state.products = action.payload.products;
         state.pages = Math.ceil(action.payload.count / 10);
+        state.loading = false;
+      })
+      .addCase(fetchSubcategoryProducts.rejected, (state, action) => {
+        if (action.payload) {
+          state.error = action.payload.message;
+        }
         state.loading = false;
       });
   },

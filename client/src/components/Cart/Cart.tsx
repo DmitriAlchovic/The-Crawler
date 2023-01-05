@@ -37,7 +37,8 @@ export default function Cart() {
         if (index >= 0) {
           const { price } = products[index];
           const { discountPercent } = products[index].discount;
-          const priceWithDisc = price - price * (discountPercent / 100);
+          const priceWithDisc =
+            Math.round((price - price * (discountPercent / 100)) * 100) / 100;
           return prev + priceWithDisc * quantity;
         }
       }
@@ -58,7 +59,12 @@ export default function Cart() {
                 );
                 const item = items[itemIdx];
                 return (
-                  <CartItem product={product} itemIdx={itemIdx} item={item} />
+                  <CartItem
+                    key={product.productId}
+                    product={product}
+                    itemIdx={itemIdx}
+                    item={item}
+                  />
                 );
               })}
           </div>

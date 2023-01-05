@@ -15,12 +15,17 @@ import ProductInfoCard from '../../components/ProductInfoCard';
 import './MainPage.sass';
 import RegisterLoginCard from '../../components/RegisterLoginCard';
 import Footer from '../../components/Footer';
+import CategoryCardLoader from '../../components/CardSlider/CategoryCardLoader';
+import ProductCardLoader from '../../components/ProductInfoCard/ProductCardLoader';
 
 export default function MainPage() {
   const CATEGORY_SLIDER_SIZE = 7;
   const PRODUCT_SLIDER_SIZE = 5;
-  const { products } = useAppSelector((state) => state.slider);
+  const { products, loading: productsLoading } = useAppSelector(
+    (state) => state.slider,
+  );
   const {
+    loading: subcategoriesLoading,
     subcategories,
     categories,
     products: categoryProducts,
@@ -64,6 +69,11 @@ export default function MainPage() {
   return (
     <div>
       <Slider />
+      {subcategoriesLoading && (
+        <div className="subcategory-product-loader">
+          <ProductCardLoader cardCount={5} />
+        </div>
+      )}
       {categoryProducts && (
         <CardSlider
           title="Featured Products"
@@ -78,6 +88,7 @@ export default function MainPage() {
           {categoryProducts &&
             categoryProducts.map((product, index) => (
               <ProductCard
+                key={product.productId}
                 product={product}
                 index={index}
                 sliderIndex={productSliderIndex}
@@ -86,6 +97,7 @@ export default function MainPage() {
             ))}
         </CardSlider>
       )}
+      {subcategoriesLoading && <CategoryCardLoader cardsCount={7} />}
       {subcategories && (
         <CardSlider
           title="Explore Categories"
@@ -99,6 +111,7 @@ export default function MainPage() {
         >
           {subcategories.map((category, index) => (
             <CategoryCard
+              key={category.name}
               category={category}
               index={index}
               sliderIndex={categorySliderIndex}
@@ -109,10 +122,13 @@ export default function MainPage() {
       )}
       <div className="featured-header">
         <h1>Featured</h1>
+
         <div className="featured">
-          {products.map((product) => (
-            <ProductInfoCard product={product} />
-          ))}
+          {productsLoading && <ProductCardLoader cardCount={4} />}
+          {products &&
+            products.map((product) => (
+              <ProductInfoCard key={product.productId} product={product} />
+            ))}
           <div className="login-register-card">
             <p className="login-register-header">10% OFF</p>
             <p className="login-register-text">
@@ -123,7 +139,6 @@ export default function MainPage() {
         </div>
       </div>
       <Info />
-      <Footer />
     </div>
   );
 }

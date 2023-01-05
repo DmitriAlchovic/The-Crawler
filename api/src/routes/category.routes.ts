@@ -3,16 +3,11 @@ import {
   categoryController,
   subcategoryController,
 } from '../controllers/category.controller';
+import categoryHandler from '../handlers/category/category.handler';
 
 const router = Router();
 
-router.get('/:categoryName', async (req, res) => {
-  const { categoryName } = req.params;
-  const subcategoryList = await subcategoryController(categoryName);
-  
-
-  return res.status(200).json(subcategoryList);
-});
+router.get('/:categoryName', categoryHandler );
 
 router.get('/', async (req, res) => {
   const categoryList = await categoryController();

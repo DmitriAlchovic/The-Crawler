@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getCartProducts } from '../../services/productService';
 import type { RootState } from '../store';
 import { Product } from './sliderSlice';
 
-type CartItem = {
+export type CartItem = {
   productId: number;
   quantity: number;
 };
@@ -19,13 +20,9 @@ export const fetchUserCart = createAsyncThunk<
 Product[],
 string,
 { state: RootState }
->('cart/fetchUserCart', async (token, { getState }) => {
-  const { cart } = getState();
-  const response = await fetch('http://localhost:5000/api/product/list', {
-    method: 'POST',
-    headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(cart.items),
-  });
+>('cart/fetchUserCart', async (_, { getState }) => {
+  const { items } = getState().cart;
+  const response = await getCartProducts(items);
   const data = await response.json();
   return data;
 });
