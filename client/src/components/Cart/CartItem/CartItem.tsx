@@ -32,27 +32,35 @@ export default function CartItem({ product, itemIdx, item }: CartItemProps) {
         <div className={styles['info-container']}>
           <div className={styles.category}>{category.name}</div>
           <div className={styles['product-name']}>{product.name}</div>
-          <div className={styles['quantity-container']}>
-            <button
-              className={styles['quantity-changer']}
-              type="button"
-              onClick={() => {
-                dispatch(changeQuantity({ itemIdx, quantityItem: 1 }));
-              }}
-            >
-              <img alt="up" src={arrow} />
-            </button>
-            <div className={styles['quantity-changer']}>{item?.quantity}</div>
-            <button
-              className={styles['quantity-changer']}
-              onClick={() => {
-                dispatch(changeQuantity({ itemIdx, quantityItem: -1 }));
-              }}
-              type="button"
-            >
-              <img className={styles['arrow-down']} alt="down" src={arrow} />
-            </button>
-          </div>
+          {item && (
+            <div className={styles['quantity-container']}>
+              <button
+                className={
+                  item.quantity + 1 <= currentQuantity
+                    ? styles['quantity-changer']
+                    : `${styles.disabled} ${styles['quantity-changer']}`
+                }
+                type="button"
+                onClick={() => {
+                  dispatch(changeQuantity({ itemIdx, quantityItem: 1 }));
+                }}
+              >
+                <img alt="up" src={arrow} />
+              </button>
+              <div className={styles['quantity-changer']}>{item?.quantity}</div>
+              <button
+                className={
+                  styles['quantity-changer']
+                }
+                onClick={() => {
+                  dispatch(changeQuantity({ itemIdx, quantityItem: -1 }));
+                }}
+                type="button"
+              >
+                <img className={styles['arrow-down']} alt="down" src={arrow} />
+              </button>
+            </div>
+          )}
           <div className={styles['price-container']}>
             <ProductInfo
               initialQuantity={initialQuantity}
@@ -64,8 +72,8 @@ export default function CartItem({ product, itemIdx, item }: CartItemProps) {
           {item && (
             <div className={styles['sum-container']}>
               {`Total: $${
-                (product.price
-                - (product.price * (discountPercent / 100))) * item.quantity
+                (product.price - product.price * (discountPercent / 100))
+                * item.quantity
               }`}
             </div>
           )}

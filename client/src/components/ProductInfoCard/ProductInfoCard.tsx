@@ -7,6 +7,7 @@ import styles from './ProductInfoCard.module.sass';
 import ProductInfo from './ProductInfo/ProductInfo';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addCartItem } from '../../store/reducers/cartSlice';
+import paths from '../../utils/paths';
 
 interface ProductInfoCardProps {
   product: Product;
@@ -31,7 +32,7 @@ export default function ProductInfoCard({ product }: ProductInfoCardProps) {
 
   return (
     <div className={styles['product-info-container']}>
-      <Link to={`product/${product.productId}`}>
+      <Link to={`${paths.productPage}${product.productId}`}>
         <div className={styles['info-header']}>
           {discountPercent && (
             <div className={styles.discount}>{`Save ${discountPercent}%`}</div>
@@ -51,26 +52,30 @@ export default function ProductInfoCard({ product }: ProductInfoCardProps) {
           discountPercent={discountPercent}
         />
       </Link>
-      <button
-        type="button"
-        disabled={isInCart}
-        onKeyDown={() => {}}
-        tabIndex={-1}
-        className={isInCart ? styles['btn-disabled'] : styles['add-btn']}
-        onClick={(e) => {
-          e.stopPropagation();
-          dispatch(addCartItem({ productId: product.productId, quantity: 1 }));
-        }}
-      >
-        {isInCart ? (
-          <div>In cart</div>
-        ) : (
-          <>
-            <img alt="cart" src={cart} />
-            <span>Add to cart</span>
-          </>
-        )}
-      </button>
+      {product.inventory.currentQuantity && (
+        <button
+          type="button"
+          disabled={isInCart}
+          onKeyDown={() => {}}
+          tabIndex={-1}
+          className={isInCart ? styles['btn-disabled'] : styles['add-btn']}
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch(
+              addCartItem({ productId: product.productId, quantity: 1 }),
+            );
+          }}
+        >
+          {isInCart ? (
+            <div>In cart</div>
+          ) : (
+            <>
+              <img alt="cart" src={cart} />
+              <span>Add to cart</span>
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 }

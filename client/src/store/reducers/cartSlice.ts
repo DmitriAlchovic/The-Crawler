@@ -61,12 +61,19 @@ const cartSlice = createSlice({
     ) {
       const { itemIdx, quantityItem } = action.payload;
       const { productId, quantity } = state.items[itemIdx];
+      const product = state.products?.find(
+        ({ productId: id }) => id === productId,
+      );
       if (quantity + quantityItem <= 0) {
         state.items = [
           ...state.items.slice(0, itemIdx),
           ...state.items.slice(itemIdx + 1),
         ];
-      } else {
+      } else if (
+        product
+        && product.inventory.currentQuantity
+          >= quantity + quantityItem
+      ) {
         state.items = [
           ...state.items.slice(0, itemIdx),
           { productId, quantity: quantity + quantityItem },

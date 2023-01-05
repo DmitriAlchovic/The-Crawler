@@ -7,7 +7,7 @@ import paths from './utils/paths';
 import './App.sass';
 import Navbar from './components/Navbar';
 import ProductPage from './pages/ProductPage';
-import Footer from './components/Footer';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
           <Routes>
             <Route path={paths.mainPage} element={<MainPage />} />
             <Route path={`${paths.productPage}:productId`} element={<ProductPage />} />
+            <Route path={`${paths.categoryPage}:categoryName/:page`} element={<CategoryPage />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </Provider>
     </div>

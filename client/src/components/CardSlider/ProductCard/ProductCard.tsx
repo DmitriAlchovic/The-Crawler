@@ -54,31 +54,32 @@ export default function ProductCard({
         <div className="card-footer">
           <div className="price">
             {`${
-              product.price
-            - product.price * (product.discount.discountPercent / 100)
+              product.price - product.price * (product.discount.discountPercent / 100)
             }$`}
           </div>
-          <button
-            type="button"
-            disabled={isInCart}
-            onKeyDown={() => {}}
-            tabIndex={-1}
-            className={isInCart ? 'button-disabled' : 'add-button'}
-            onClick={() => {
-              dispatch(
-                addCartItem({ productId: product.productId, quantity: 1 }),
-              );
-            }}
-          >
-            {isInCart ? (
-              <div>In cart</div>
-            ) : (
-              <>
-                <img className="cart" alt="cart" src={cart} />
-                <span>Add</span>
-              </>
-            )}
-          </button>
+          {product.inventory.currentQuantity && (
+            <button
+              type="button"
+              disabled={isInCart}
+              onKeyDown={() => {}}
+              tabIndex={-1}
+              className={isInCart ? 'button-disabled' : 'add-button'}
+              onClick={() => {
+                dispatch(
+                  addCartItem({ productId: product.productId, quantity: 1 }),
+                );
+              }}
+            >
+              {isInCart ? (
+                <div>In cart</div>
+              ) : (
+                <>
+                  <img className="cart" alt="cart" src={cart} />
+                  <span>Add</span>
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>
