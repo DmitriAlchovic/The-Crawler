@@ -10,22 +10,53 @@
         position: relative
         display: flex
         flex-direction: column
-        align-self: center 
+        align-self: center
         text-align: start
 
-        .input
-            width: 224px
-            color: grey
-            font-weight: 500
-            font-size: 14px
-            border: none
-            padding: 12px
-            width: inherit
-            height: inherit
-            height: 2.2rem
+        .input-container
+            border: 1px solid #adadad
+            display: flex
+            padding: 3px
+            background-color: #fff
+
+            .input
+                border: none
+                color: grey
+                font-weight: 500
+                font-size: 14px
+                padding: 12px
+                width: inherit
+                height: inherit
+                height: 1.4rem
+
+                &:focus
+                    outline: none
+
+    .create-link
+        width: 15rem
+        text-align: center
+        word-wrap: wrap
+        text-decoration: underline
+        cursor: pointer
+        font-size: 14px
+
+        .promo
+            font-size: 10px
+            text-decoration: none
+
+    .input-error
+        display: flex
+        align-items: center
+        flex-direction: row
+        height: 2rem
+        font-size: 0.9rem
+        color: red
+        word-wrap: wrap
+        max-width: 14rem 
 
     .login-register-btn
         background-color: #3BB77E
+        border: none
         color: #ffff
         width: 204px
         height: 40px
@@ -34,5 +65,5 @@
         align-self: center
         align-items: center
         font-size: 14px
-        margin: 35px 10px 20px 10px
+        margin: 10px 10px 20px 10px
         cursor: pointer
