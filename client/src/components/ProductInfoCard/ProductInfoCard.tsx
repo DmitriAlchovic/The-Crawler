@@ -1,8 +1,11 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Product } from '../../store/reducers/sliderSlice';
 import cart from '../../assets/shopping-cart.svg';
 import styles from './ProductInfoCard.module.sass';
+import ProductInfo from './ProductInfo/ProductInfo';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { addCartItem } from '../../store/reducers/cartSlice';
 
 interface ProductInfoCardProps {
   product: Product;
@@ -12,8 +15,19 @@ export default function ProductInfoCard({ product }: ProductInfoCardProps) {
   const { discountPercent } = product.discount;
   const { initialQuantity, currentQuantity } = product.inventory;
   const { category } = product.subcategory;
+  const { items } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const [isInCart, setIsInCart] = useState(false);
 
-  const findPrecent = (inititial: number, current: number): number => Math.floor((current / inititial) * 100);
+  useEffect(() => {
+    const inCart = items.find(
+      ({ productId }) => productId === product.productId,
+    );
+    if (inCart) {
+      setIsInCart(true);
+    } else setIsInCart(false);
+  }, [items]);
+
   return (
     <div className={styles['product-info-container']}>
       <div className={styles['info-header']}>
@@ -28,28 +42,31 @@ export default function ProductInfoCard({ product }: ProductInfoCardProps) {
         <div className={styles.category}>{category.name}</div>
         <div className={styles['product-name']}>{product.name}</div>
       </div>
-      <div className={styles['info-body']}>
-        <div className={styles['product-price']}>{`$${product.price}`}</div>
-        {initialQuantity && (
-          <div>
-            <div className={styles['quantity-bar-container']}>
-              <div
-                className={styles['quantity-bar']}
-                style={{
-                  width: `${findPrecent(initialQuantity, currentQuantity)}%`,
-                }}
-              />
-            </div>
-            <div className={styles.quantity}>
-              {`Sold: ${currentQuantity}/${initialQuantity}`}
-            </div>
-          </div>
+      <ProductInfo
+        initialQuantity={initialQuantity}
+        currentQuantity={currentQuantity}
+        price={product.price}
+        discountPercent={discountPercent}
+      />
+      <button
+        type="button"
+        disabled={isInCart}
+        onKeyDown={() => {}}
+        tabIndex={-1}
+        className={isInCart ? styles['btn-disabled'] : styles['add-btn']}
+        onClick={() => {
+          dispatch(addCartItem(product.productId));
+        }}
+      >
+        {isInCart ? (
+          <div>In cart</div>
+        ) : (
+          <>
+            <img alt="cart" src={cart} />
+            <span>Add to cart</span>
+          </>
         )}
-      </div>
-      <div className={styles['add-btn']}>
-        <img alt="cart" src={cart} />
-        <span>Add to cart</span>
-      </div>
+      </button>
     </div>
   );
 }

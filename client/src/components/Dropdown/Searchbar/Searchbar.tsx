@@ -61,7 +61,7 @@ export default function Searchbar() {
               ))}
             </div>
           </Dropdown>
-          <p className={styles['active-category']}>{activeCategory}</p>
+          <div className={styles['active-category']}>{activeCategory}</div>
         </div>
         <div className={styles['input-container']}>
           <div className={styles['border-right']} />

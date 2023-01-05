@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import chevron from '../../assets/chevron.svg';
 import styles from './Dropdown.module.sass';
 
@@ -12,12 +12,6 @@ export default function Dropdown({
   hasChildrenClose,
 }: DropdownProps) {
   const [isShown, setIsShown] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setIsShown(false);
-    });
-  }, []);
 
   return (
     <div className={styles['drop-container']}>
