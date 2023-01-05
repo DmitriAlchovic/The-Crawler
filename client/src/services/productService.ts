@@ -1,5 +1,7 @@
-// eslint-disable-next-line import/no-cycle
-import { CartItem } from '../store/reducers/cartSlice';
+type CartItem = {
+  productId: number;
+  quantity: number;
+};
 
 const API_URL = 'http://localhost:5000/api/' || process.env.API_URL;
 

@@ -11,10 +11,10 @@ import { ShoppingSession } from '../models/shopping_session.model';
 import { Subcategory } from '../models/subcategory.model';
 import { User } from '../models/user.model';
 
-const database = new Sequelize('The Grocery', 'root', '12345', {
+const database = new Sequelize(process.env.DB_NAME ||'The Grocery', process.env.DB_USER || 'root', process.env.DB_PASSWORD || '12345', {
   host: 'db',
   port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT, 10) : 3306,
-  dialect: 'mariadb',
+  dialect: 'mysql',
   timezone: '+03:00',
   pool: {
     max: 100,

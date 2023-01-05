@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Info should create empty component 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <div
+          class="footer-body"
+        >
+          <div>
+            <div
+              class="logo"
+            >
+              <img
+                alt="logo"
+                class="icon"
+                src="logo.svg"
+              />
+              Grocery
+            </div>
+            <div
+              class="contacts"
+            >
+              <img
+                alt="location"
+                class="icon"
+                src="icon_location.svg"
+              />
+              Address: 4242 Road House
+            </div>
+            <div
+              class="contacts"
+            >
+              <img
+                alt="phone"
+                class="icon"
+                src="icon_phone.svg"
+              />
+              Call Us: 1234-5678
+            </div>
+            <div
+              class="contacts"
+            >
+              <img
+                alt="mail"
+                class="icon"
+                src="icon_envelope.svg"
+              />
+              Email: grocery@contact.com
+            </div>
+            <div>
+              <img
+                alt="clock"
+                class="icon"
+                src="icon_clock.svg"
+              />
+              Work hours: 8:00 - 20:00, Sunday - Thursday
+            </div>
+          </div>
+          <div>
+            <div
+              class="info-header"
+            >
+              Useful links
+            </div>
+            <a
+              href="/category/hot/1"
+            >
+              <div
+                class="info"
+              >
+                Hot deals
+              </div>
+            </a>
+            <a
+              href="/category/promotions/1"
+            >
+              <div
+                class="info"
+              >
+                Promotions
+              </div>
+            </a>
+            <a
+              href="/category/new/1"
+            >
+              <div
+                class="info"
+              >
+                New products
+              </div>
+            </a>
+          </div>
+        </div>
+        <div
+          class="footer-body"
+        >
+          <div>
+            © 2022, All rights reserved
+          </div>
+          <div>
+            <img
+              alt="payment systems"
+              src="payment.svg"
+            />
+          </div>
+          <div>
+            <img
+              alt="facebook"
+              src="icon _facebook_.svg"
+            />
+            <img
+              alt="linkedin"
+              src="icon _linkedin_.svg"
+            />
+            <img
+              alt="telegram"
+              src="icon _telegram plane_.svg"
+            />
+            <img
+              alt="instagram"
+              src="icon _instagram_.svg"
+            />
+            <img
+              alt="twitter"
+              src="icon _twitter_.svg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div>
+      <div
+        class="footer-body"
+      >
+        <div>
+          <div
+            class="logo"
+          >
+            <img
+              alt="logo"
+              class="icon"
+              src="logo.svg"
+            />
+            Grocery
+          </div>
+          <div
+            class="contacts"
+          >
+            <img
+              alt="location"
+              class="icon"
+              src="icon_location.svg"
+            />
+            Address: 4242 Road House
+          </div>
+          <div
+            class="contacts"
+          >
+            <img
+              alt="phone"
+              class="icon"
+              src="icon_phone.svg"
+            />
+            Call Us: 1234-5678
+          </div>
+          <div
+            class="contacts"
+          >
+            <img
+              alt="mail"
+              class="icon"
+              src="icon_envelope.svg"
+            />
+            Email: grocery@contact.com
+          </div>
+          <div>
+            <img
+              alt="clock"
+              class="icon"
+              src="icon_clock.svg"
+            />
+            Work hours: 8:00 - 20:00, Sunday - Thursday
+          </div>
+        </div>
+        <div>
+          <div
+            class="info-header"
+          >
+            Useful links
+          </div>
+          <a
+            href="/category/hot/1"
+          >
+            <div
+              class="info"
+            >
+              Hot deals
+            </div>
+          </a>
+          <a
+            href="/category/promotions/1"
+          >
+            <div
+              class="info"
+            >
+              Promotions
+            </div>
+          </a>
+          <a
+            href="/category/new/1"
+          >
+            <div
+              class="info"
+            >
+              New products
+            </div>
+          </a>
+        </div>
+      </div>
+      <div
+        class="footer-body"
+      >
+        <div>
+          © 2022, All rights reserved
+        </div>
+        <div>
+          <img
+            alt="payment systems"
+            src="payment.svg"
+          />
+        </div>
+        <div>
+          <img
+            alt="facebook"
+            src="icon _facebook_.svg"
+          />
+          <img
+            alt="linkedin"
+            src="icon _linkedin_.svg"
+          />
+          <img
+            alt="telegram"
+            src="icon _telegram plane_.svg"
+          />
+          <img
+            alt="instagram"
+            src="icon _instagram_.svg"
+          />
+          <img
+            alt="twitter"
+            src="icon _twitter_.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

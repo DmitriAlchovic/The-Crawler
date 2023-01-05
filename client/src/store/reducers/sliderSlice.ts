@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/no-cycle
 import { getFeaturedProduct } from '../../services/productService';
 
 export type Inventory = {

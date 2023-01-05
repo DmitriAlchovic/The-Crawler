@@ -2,3 +2,8 @@ npm-debug.log*
 node_modules/
 databases/
 .env
+
+.idea/*
+/__snapshots__
+.snap
+.vscode/*
