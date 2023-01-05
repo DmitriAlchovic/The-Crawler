@@ -1,0 +1,51 @@
+.product-card-container
+    width: 224px
+    height: 302px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    margin: 15px
+    border: 1px solid rgba(173, 173, 173, 0.25)
+    border-radius: 3px
+    
+
+    .product-image
+        object-fit: cover
+        width: 224px
+        height: 154px
+    
+    .card-body
+        margin: 10px
+
+        .category
+            font-size: 12px
+            font-weight: 400
+            color: grey
+
+        .product-name
+            font-weight: 600
+            font-size: 16px
+
+    .card-footer
+        display: flex
+        justify-content: space-between
+        margin: 12px
+        height: 34px
+
+        .price
+            color: #3bb77e
+            font-size: 18px
+
+        .add-button
+            color: #3bb77e
+            background-color: #def9ec
+            display: flex
+            align-items: center
+            justify-content: center
+            width: 90px
+
+            .cart
+                margin-right: 5px 
+
+.card-hiden
+   display: none 
