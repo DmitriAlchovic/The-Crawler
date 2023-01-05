@@ -47,6 +47,7 @@ export const fetchProductFromCategory = createAsyncThunk<Product[], string>(
       `http://localhost:5000/api/product/category/${categoryName}`,
     );
     const data = await response.json();
+    console.log(data);
     return data;
   },
 );

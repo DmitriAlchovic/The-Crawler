@@ -14,7 +14,6 @@ import {
 import ProductInfoCard from '../../components/ProductInfoCard';
 import './MainPage.sass';
 import RegisterLoginCard from '../../components/RegisterLoginCard';
-import Footer from '../../components/Footer';
 
 export default function MainPage() {
   const CATEGORY_SLIDER_SIZE = 7;
@@ -123,7 +122,6 @@ export default function MainPage() {
         </div>
       </div>
       <Info />
-      <Footer />
     </div>
   );
 }

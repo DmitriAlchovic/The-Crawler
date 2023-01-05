@@ -32,9 +32,9 @@ export default function CartItem({ product, itemIdx, item }: CartItemProps) {
         <div className={styles['info-container']}>
           <div className={styles.category}>{category.name}</div>
           <div className={styles['product-name']}>{product.name}</div>
-          <div className={styles['quantity-conatainer']}>
+          <div className={styles['quantity-container']}>
             <button
-              className={styles['quantity-cahanger']}
+              className={styles['quantity-changer']}
               type="button"
               onClick={() => {
                 dispatch(changeQuantity({ itemIdx, quantityItem: 1 }));
@@ -42,9 +42,9 @@ export default function CartItem({ product, itemIdx, item }: CartItemProps) {
             >
               <img alt="up" src={arrow} />
             </button>
-            <div className={styles['quantity-cahanger']}>{item?.quantity}</div>
+            <div className={styles['quantity-changer']}>{item?.quantity}</div>
             <button
-              className={styles['quantity-cahanger']}
+              className={styles['quantity-changer']}
               onClick={() => {
                 dispatch(changeQuantity({ itemIdx, quantityItem: -1 }));
               }}
@@ -62,7 +62,7 @@ export default function CartItem({ product, itemIdx, item }: CartItemProps) {
             />
           </div>
           {item && (
-            <div className={styles['summ-container']}>
+            <div className={styles['sum-container']}>
               {`Total: $${
                 (product.price
                 - (product.price * (discountPercent / 100))) * item.quantity

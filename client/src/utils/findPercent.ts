@@ -1,4 +1,4 @@
 /* eslint-disable max-len */
-const findPrecent = (inititial: number, current: number): number => Math.floor((current / inititial) * 100);
+const findPercent = (initial: number, current: number): number => Math.floor((current / initial) * 100);
 
-export default findPrecent;
+export default findPercent;

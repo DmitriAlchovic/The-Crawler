@@ -6,6 +6,8 @@ import MainPage from './pages/MainPage';
 import paths from './utils/paths';
 import './App.sass';
 import Navbar from './components/Navbar';
+import ProductPage from './pages/ProductPage';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route path={paths.mainPage} element={<MainPage />} />
+            <Route path={`${paths.productPage}:productId`} element={<ProductPage />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </Provider>
     </div>

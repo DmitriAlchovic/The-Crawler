@@ -18,7 +18,7 @@ export default function CategoryCard({
   return (
     <div
       className={
-        index >= (sliderIndex - sliderSize) && index < sliderIndex ? 'category-container' : 'container-hiden'
+        index >= (sliderIndex - sliderSize) && index < sliderIndex ? 'category-container' : 'container-hidden'
       }
     >
       <div>

@@ -83,8 +83,8 @@ export default function RegisterLoginCard({
       )}
       {isValidated && (
         <form>
-          <label className={styles.label} htmlFor="fullname">
-            Enter fullname
+          <label className={styles.label} htmlFor="fullName">
+            Enter full name
             <div className={styles['input-container']}>
               <img alt="envelope" src={userIcon} />
               <input
