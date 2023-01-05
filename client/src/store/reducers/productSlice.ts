@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getProduct } from '../../services/productService';
 import { Product } from './sliderSlice';
 
 type ProductState = {
@@ -8,12 +9,17 @@ type ProductState = {
   error: string | null;
 };
 
-export const fetchProduct = createAsyncThunk<Product, number>(
+export const fetchProduct = createAsyncThunk<Product, number, { rejectValue: Error } >(
   'product/fetchProduct',
-  async (productId) => {
-    const response = await fetch(`http://localhost:5000/api/product/${productId}`);
-    const data = await response.json();
-    return data;
+  async (productId, { rejectWithValue }) => {
+    try {
+      const response = await getProduct(productId);
+      const data = await response.json();
+      if (!response.ok) { throw new Error(data.message); }
+      return data;
+    } catch (error:any) {
+      return rejectWithValue(error);
+    }
   },
 );
 
@@ -35,6 +41,12 @@ const sliderSlice = createSlice({
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.product = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchProduct.rejected, (state, action) => {
+        if (action.payload) {
+          state.error = action.payload.message;
+        }
         state.loading = false;
       });
   },

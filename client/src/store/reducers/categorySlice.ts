@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getCategoryByName, getCategoryList } from '../../services/categoryService';
+import { getProductByCategory } from '../../services/productService';
 import { Product } from './sliderSlice';
 
 export type Subcategory = {
@@ -23,9 +25,7 @@ type CategoryState = {
 export const fetchSubcategories = createAsyncThunk<Subcategory[], string>(
   'subcategory/fetchSubcategories',
   async (categoryName) => {
-    const response = await fetch(
-      `http://localhost:5000/api/category/${categoryName}`,
-    );
+    const response = await getCategoryByName(categoryName);
     const data = await response.json();
     return data;
   },
@@ -34,7 +34,7 @@ export const fetchSubcategories = createAsyncThunk<Subcategory[], string>(
 export const fetchCategories = createAsyncThunk<Category[], void>(
   'category/fetchCategories',
   async () => {
-    const response = await fetch('http://localhost:5000/api/category/');
+    const response = await getCategoryList();
     const data = await response.json();
     return data;
   },
@@ -43,11 +43,8 @@ export const fetchCategories = createAsyncThunk<Category[], void>(
 export const fetchProductFromCategory = createAsyncThunk<Product[], string>(
   'product/fetchProductFromCategory',
   async (categoryName) => {
-    const response = await fetch(
-      `http://localhost:5000/api/product/category/${categoryName}`,
-    );
+    const response = await getProductByCategory(categoryName);
     const data = await response.json();
-    console.log(data);
     return data;
   },
 );

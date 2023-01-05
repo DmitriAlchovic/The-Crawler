@@ -1,0 +1,53 @@
+.slider-container
+    position: relative
+    max-width: 100vw
+    overflow: hidden
+    margin-bottom: 110px
+
+.slider-radio:hover
+    cursor: pointer
+
+.slider-radio
+    border: 2px solid #999
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    border-radius: 50%
+    transition: 0.2s all linear
+    width: 10px
+    height: 10px
+    margin: 3px
+    z-index: 2
+
+.slider-radio:checked
+    border: 5px solid #3BB77E
+
+.radio-container
+    display: flex
+    position: absolute
+    bottom: 5%
+    align-self: center
+    justify-self: center
+    left: 50%
+
+.loader
+    position: 
+    height: 481px
+
+.animated-background
+    height: inherit
+    animation-duration: 1.25s
+    animation-fill-mode: forwards
+    animation-iteration-count: infinite
+    animation-name: placeHolderShimmer
+    animation-timing-function: linear
+    background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%)
+    background-size: 800px 104px
+    position: relative
+
+@keyframes placeHolderShimmer
+    0%
+        background-position: -468px 0
+
+    100%
+        background-position: 468px 0

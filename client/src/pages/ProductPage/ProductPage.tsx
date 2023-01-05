@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchProduct } from '../../store/reducers/productSlice';
 import cart from '../../assets/shopping-cart.svg';
@@ -7,27 +7,34 @@ import styles from './ProductPage.module.sass';
 import { addCartItem } from '../../store/reducers/cartSlice';
 import ProductPageHeader from '../../components/ProductPageHeader';
 import ProductPageFooter from '../../components/ProductPageFooter';
+import paths from '../../utils/paths';
 
 export default function ProductPage() {
   const { productId } = useParams();
   const dispatch = useAppDispatch();
-  const { product } = useAppSelector((state) => state.product);
+  const { product, error } = useAppSelector((state) => state.product);
   const { items } = useAppSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (productId) {
       dispatch(fetchProduct(parseInt(productId, 10)));
     }
-  }, []);
+  }, [productId]);
+
+  useEffect(() => {
+    if (error) {
+      navigator(paths.errorPage);
+    }
+  }, [error]);
 
   const quantityHandler = (changer: number) => {
     if (
       quantity + changer !== 0
       && product
-      && product.inventory.currentQuantity
-        >= quantity + changer
+      && product.inventory.currentQuantity >= quantity + changer
     ) {
       setQuantity(quantity + changer);
     }
@@ -42,7 +49,7 @@ export default function ProductPage() {
         setIsInCart(true);
       } else setIsInCart(false);
     }
-  }, [items]);
+  }, [items, isInCart, product]);
 
   return (
     <div className={styles['page-container']}>
@@ -70,7 +77,7 @@ export default function ProductPage() {
               quantity={quantity}
             />
           )}
-          {product?.inventory.currentQuantity && (
+          {product && product.inventory.currentQuantity && (
             <button
               type="button"
               disabled={isInCart}

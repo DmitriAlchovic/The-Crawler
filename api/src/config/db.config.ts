@@ -13,7 +13,7 @@ import { User } from '../models/user.model';
 
 const database = new Sequelize('The Grocery', 'root', '12345', {
   host: 'db',
-  port: 3306,
+  port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT, 10) : 3306,
   dialect: 'mariadb',
   timezone: '+03:00',
   pool: {

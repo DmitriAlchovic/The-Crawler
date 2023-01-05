@@ -6,12 +6,13 @@ import Dropdown from '../Dropdown';
 import styles from './Searchbar.module.sass';
 import { fetchProductBySearch } from '../../../store/reducers/searchSlice';
 import SearchResult from './SearchResult';
+import SearchResultLoader from './SearchResultLoader';
 
 export default function Searchbar() {
   const [activeCategory, setActiveCategory] = useState('All categories');
   const [searchInput, setSearchInput] = useState('');
   const { categories } = useAppSelector((state) => state.categories);
-  const { products } = useAppSelector((state) => state.search);
+  const { products, loading } = useAppSelector((state) => state.search);
   const [isShown, setIsShown] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -20,12 +21,14 @@ export default function Searchbar() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(
-      fetchProductBySearch({
-        categoryName: activeCategory,
-        searchStr: searchInput,
-      }),
-    );
+    if (searchInput) {
+      dispatch(
+        fetchProductBySearch({
+          categoryName: activeCategory,
+          searchStr: searchInput,
+        }),
+      );
+    }
   }, [searchInput]);
 
   return (
@@ -47,6 +50,7 @@ export default function Searchbar() {
               </div>
               {categories?.map(({ name }) => (
                 <div
+                  key={name}
                   role="button"
                   tabIndex={-1}
                   onKeyDown={() => {}}
@@ -78,7 +82,8 @@ export default function Searchbar() {
             }}
           />
           <div className={styles['search-options']}>
-            {products && isShown && (
+            {loading && isShown && <SearchResultLoader itemsCount={4} />}
+            {products && isShown && searchInput && (
               <>
                 <div
                   aria-label="label"

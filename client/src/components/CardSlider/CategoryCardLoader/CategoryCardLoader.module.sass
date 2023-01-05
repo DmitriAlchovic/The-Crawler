@@ -1,0 +1,26 @@
+.container
+    display: flex
+    align-items: center
+    justify-content: center
+    .card
+        height: 215px
+        width: 12rem !important
+        animation-duration: 1.25s
+        animation-fill-mode: forwards
+        animation-iteration-count: infinite
+        animation-name: placeHolderShimmer
+        animation-timing-function: linear
+        background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%)
+        background-size: 800px 104px
+        position: relative
+        margin: 21px
+        display: flex
+        justify-self: flex-start
+        justify-content: center
+
+@keyframes placeHolderShimmer
+    0%
+        background-position: -468px 0
+
+    100%
+        background-position: 468px 0

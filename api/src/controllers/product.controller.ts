@@ -79,6 +79,10 @@ export const byCategoryController = async (categoryName: string) => {
           ],
           attributes: ['categoryId'],
         },
+        {
+          model: ProductInventory,
+          attributes: ['currentQuantity', 'initialQuantity'],
+        },
       ],
     }).then((product) =>
       product.filter(({ subcategory }) => subcategory.category.name !== null),
@@ -249,13 +253,7 @@ export const discountProductController = async (page: number) => {
     offset: PAGE_ITEMS_COUNT * page,
     raw: true,
     nest: true,
-    attributes: [
-      'productId',
-      'name',
-      'gallery',
-      'desc',
-      'price',
-    ],
+    attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
     include: [
       {
         model: Discount,
@@ -263,8 +261,7 @@ export const discountProductController = async (page: number) => {
           discountPercent: { [Op.not]: null },
           active: { [Op.is]: true },
         },
-        attributes: ['name', 'desc', 'discountPercent',
-      ],
+        attributes: ['name', 'desc', 'discountPercent'],
         as: 'discount',
       },
       {
@@ -300,13 +297,7 @@ export const hotDealProducts = async (page: number) => {
     offset: PAGE_ITEMS_COUNT * page,
     raw: true,
     nest: true,
-    attributes: [
-      'productId',
-      'name',
-      'gallery',
-      'desc',
-      'price',
-    ],
+    attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
     include: [
       {
         model: Discount,
@@ -343,13 +334,7 @@ export const newProducts = async (page: number) => {
     offset: PAGE_ITEMS_COUNT * page,
     raw: true,
     nest: true,
-    attributes: [
-      'productId',
-      'name',
-      'gallery',
-      'desc',
-      'price',
-    ],
+    attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
     include: [
       {
         model: Discount,

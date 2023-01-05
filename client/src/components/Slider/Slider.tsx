@@ -1,67 +1,75 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeIndex, fetchFeatured } from '../../store/reducers/sliderSlice';
-import paths from '../../utils/paths';
-import './Slider.sass';
+import { RootState } from '../../store/store';
+import Slide from './Slide/Slide';
+import styles from './Slider.module.sass';
 
 export default function Slider() {
   const dispatch = useAppDispatch();
-  const slideIndex = useAppSelector((state) => state.slider.index);
-  const products = useAppSelector((state) => state.slider.products);
+  const {
+    index: sliderIndex,
+    products,
+    loading,
+  } = useAppSelector((state: RootState) => state.slider);
 
   useEffect(() => {
     dispatch(fetchFeatured());
   }, [dispatch]);
 
-  const slides = products.map(
-    ({
-      productId, name, price, discount, gallery,
-    }, index) => (
-      <div
-        key={productId}
-        className={index === slideIndex ? 'sliderContentContainer' : 'hidden'}
-      >
-        <div className="sliderInfo">
-          {discount.name && <p className="sliderText">{discount.name}</p>}
-          <Link to={`${paths.productPage}${productId}`}>
-            <p className="sliderText">
-              {`${name} $${price - price * (discount.discountPercent / 100)} `}
-              {discount.discountPercent && (
-                <span className="priceWithoutDiscount">{`$${price}`}</span>
-              )}
-            </p>
-          </Link>
-          {discount.discountPercent && (
-            <p className="discount">{`Save ${discount.discountPercent}%`}</p>
-          )}
-        </div>
-        <div>
-          <Link to={`${paths.productPage}${productId}`}>
-            <img className="imgContainer" alt="no img" src={gallery} />
-          </Link>
-        </div>
-      </div>
-    ),
-  );
+  useEffect(() => {
+    const sliderTimer = setTimeout(() => {
+      if ((sliderIndex + 1) <= (products.length - 1)) {
+        dispatch(changeIndex(sliderIndex + 1));
+      } else dispatch(changeIndex(0));
+    }, 5000);
+
+    return () => {
+      clearTimeout(sliderTimer);
+    };
+  }, [sliderIndex, products]);
 
   return (
-    <div className="sliderContainer">
-      <div className="radioContainer">
-        {products.map(({ name }, index) => (
-          <input
-            readOnly
-            checked={index === slideIndex}
-            className="sliderRadio"
-            key={name}
-            type="radio"
-            onClick={() => {
-              dispatch(changeIndex(index));
-            }}
-          />
-        ))}
-      </div>
-      {slides}
+    <div className={styles['slider-container']}>
+      {loading && (
+        <div className={styles.loader}>
+          <div className={styles['animated-background']} />
+        </div>
+      )}
+      {products && (
+        <div>
+          <div className={styles['radio-container']}>
+            {products.map(({ productId }, index) => (
+              <input
+                readOnly
+                checked={index === sliderIndex}
+                className={styles['slider-radio']}
+                key={productId}
+                type="radio"
+                onClick={() => {
+                  dispatch(changeIndex(index));
+                }}
+              />
+            ))}
+          </div>
+          {products.map(
+            ({
+              productId, price, name, discount, gallery,
+            }, index) => (
+              <Slide
+                key={productId}
+                productId={productId}
+                price={price}
+                name={name}
+                discount={discount}
+                index={index}
+                sliderIndex={sliderIndex}
+                gallery={gallery}
+              />
+            ),
+          )}
+        </div>
+      )}
     </div>
   );
 }

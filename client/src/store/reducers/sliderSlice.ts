@@ -1,17 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getFeaturedProduct } from '../../services/productService';
 
 export type Inventory = {
   currentQuantity: number;
   initialQuantity: number;
 };
 
-type Subcategory = {
+export type Subcategory = {
   name: string;
   category: { name: string };
 };
 
-type Discount = {
+export type Discount = {
   name: string;
   discountPercent: number;
 };
@@ -38,9 +39,8 @@ type SliderState = {
 export const fetchFeatured = createAsyncThunk<Product[], void>(
   'slider/fetchFeatured',
   async () => {
-    const response = await fetch('http://localhost:5000/api/product/new/4');
+    const response = await getFeaturedProduct();
     const data = await response.json();
-    console.log(data);
     return data;
   },
 );
