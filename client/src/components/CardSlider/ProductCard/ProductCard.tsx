@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Product } from '../../../store/reducers/sliderSlice';
 import cart from '../../../assets/shopping-cart-green.svg';
 import './ProductCard.sass';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { addCartItem } from '../../../store/reducers/cartSlice';
 
 interface ProductCardProps {
   product: Product;
@@ -16,9 +18,26 @@ export default function ProductCard({
   sliderIndex,
   sliderSize,
 }: ProductCardProps) {
+  const dispatch = useAppDispatch();
+  const { items } = useAppSelector((state) => state.cart);
+  const [isInCart, setIsInCart] = useState(false);
+
+  useEffect(() => {
+    const inCart = items.find(
+      ({ productId }) => productId === product.productId,
+    );
+    if (inCart) {
+      setIsInCart(true);
+    } else setIsInCart(false);
+  }, [items]);
+
   return (
     <div
-      className={index >= (sliderIndex - sliderSize) && index < sliderIndex ? 'product-card-container' : 'card-hiden'}
+      className={
+        index >= sliderIndex - sliderSize && index < sliderIndex
+          ? 'product-card-container'
+          : 'card-hiden'
+      }
     >
       <div>
         <img className="product-image" alt="product" src={product.gallery} />
@@ -29,11 +48,26 @@ export default function ProductCard({
       </div>
       <div>
         <div className="card-footer">
-          <div className="price">{`${product.price}$`}</div>
-          <div className="add-button">
-            <img className="cart" alt="cart" src={cart} />
-            <span>Add</span>
-          </div>
+          <div className="price">{`${product.price - product.price * (product.discount.discountPercent / 100)}$`}</div>
+          <button
+            type="button"
+            disabled={isInCart}
+            onKeyDown={() => {}}
+            tabIndex={-1}
+            className={isInCart ? 'button-disabled' : 'add-button'}
+            onClick={() => {
+              dispatch(addCartItem(product.productId));
+            }}
+          >
+            {isInCart ? (
+              <div>In cart</div>
+            ) : (
+              <>
+                <img className="cart" alt="cart" src={cart} />
+                <span>Add</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

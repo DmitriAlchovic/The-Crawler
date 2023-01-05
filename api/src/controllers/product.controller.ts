@@ -138,4 +138,26 @@ export const searchByCategoryController = async (
     );
 };
 
+export const cartController = async (idList: number[]) => {
+  return await Product.findAll({
+    where: {productId: idList},
+    raw: true,
+    nest: true,
+    attributes: ['productId', 'name', 'gallery', 'desc', 'price'],
+    include: [
+      {
+        model: Discount,
+        attributes: ['name', 'desc', 'discountPercent'],
+      },
+      {
+        model: Subcategory,
+        include: [{ model: Category, attributes: ['name'] }],
+      },
+      {
+        model: ProductInventory,
+        attributes: ['currentQuantity', 'initialQuantity'],
+      },
+    ],
+  });
+};
 export default featuredController;

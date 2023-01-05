@@ -27,7 +27,6 @@ export const fetchSubcategories = createAsyncThunk<Subcategory[], string>(
       `http://localhost:5000/api/category/${categoryName}`,
     );
     const data = await response.json();
-    console.log(data);
     return data;
   },
 );

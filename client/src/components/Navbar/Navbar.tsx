@@ -10,6 +10,7 @@ import megaphone from '../../assets/icon_megaphone.svg';
 import phone from '../../assets/icon_phone.svg';
 import logo from '../../assets/logo.svg';
 import styles from './Navbar.module.sass';
+import Cart from '../Cart';
 
 export default function Navbar() {
   const { pathname } = useLocation();
@@ -24,10 +25,7 @@ export default function Navbar() {
         </div>
         <Searchbar />
         <div>
-          <Dropdown hasChildrenClose={false}>
-            <div>Cart</div>
-          </Dropdown>
-          <p>Cart</p>
+          <Cart />
         </div>
         <div>
           <Dropdown hasChildrenClose={false}>

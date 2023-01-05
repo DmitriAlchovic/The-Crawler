@@ -17,7 +17,7 @@ type Discount = {
 };
 
 export type Product = {
-  productId: string;
+  productId: number;
   name: string;
   price: number;
   discount: Discount;
