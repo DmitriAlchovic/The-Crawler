@@ -7,3 +7,6 @@ databases/
 /__snapshots__
 .snap
 .vscode/*
+
+.jpg
+.png

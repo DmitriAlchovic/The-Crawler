@@ -22,13 +22,24 @@ string,
 { state: RootState }
 >('cart/fetchUserCart', async (_, { getState }) => {
   const { items } = getState().cart;
-  const response = await getCartProducts(items);
-  const data = await response.json();
-  return data;
+  if (items) {
+    const response = await getCartProducts(items);
+    const data = await response.json();
+    return data;
+  }
+  return null;
 });
 
+const storageItem = () => {
+  const item = localStorage.getItem('cart');
+  if (item) {
+    return JSON.parse(item);
+  }
+  return [];
+};
+
 const initialState: CartState = {
-  items: [],
+  items: storageItem(),
   products: null,
   loading: false,
   error: null,
@@ -50,6 +61,7 @@ const cartSlice = createSlice({
           productId: action.payload.productId,
           quantity: action.payload.quantity,
         });
+        localStorage.setItem('cart', JSON.stringify(state.items));
       }
     },
     changeQuantity(
@@ -77,6 +89,7 @@ const cartSlice = createSlice({
           ...state.items.slice(itemIdx + 1),
         ];
       }
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
   },
   extraReducers: (builder) => {
